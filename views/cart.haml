@@ -1,0 +1,19 @@
+%p= "Order ##{@order.order_no}"
+%table.table
+  - @order.order_lines.each do |line|
+    %tr
+      %td
+        = line.product.name
+      %td
+        = line.qty
+      %td
+        = "$#{line.unit_price}"
+  %tr
+    %td
+      Total
+    %td
+    %td
+      = "$#{@order.total}"
+
+%a{href: '/products', class: 'btn btn-default'} Add more items
+%a{href: '/payment', class: 'btn btn-success'} Proceed To Payment

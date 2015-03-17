@@ -1,0 +1,13 @@
+%h2 Your current orders:
+%br
+%table.table
+  - @orders.each_with_index do |order, index|
+    %tr
+      %td
+        = index + 1
+      %td
+        = "##{order.order_no}"
+      %td
+        = "$#{order.total}"
+      %td
+        = order.created_at.strftime('%d %b %Y, %H:%M')

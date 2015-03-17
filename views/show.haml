@@ -3,7 +3,8 @@
 %p= "Price: $#{@product.price}"
 %br
 %p
-  %a{href: "/products/#{@product.id}/edit", class: 'btn btn-default btn-xs'} Edit
+  %a{href: "/order?id=#{@product.id}&price=#{@product.price}", class: 'btn btn-default'} Add To Cart
+  %a{href: "/products/#{@product.id}/edit", class: 'btn btn-default'} Edit
   %form{action: "/products/#{@product.id}", method: 'POST'}
     %input{type: 'hidden', name: '_method', value: 'DELETE'}
-    %input{type: 'submit', value: 'Delete', class: 'btn btn-danger btn-xs'}
+    %input{type: 'submit', value: 'Delete', class: 'btn btn-danger'}

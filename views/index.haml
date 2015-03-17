@@ -11,7 +11,7 @@
             %a{href: "/products/#{product.id}"}
               = product.name
           %td= product.description
-          %td= product.price
+          %td= "$#{product.price}"
           %td= product.status == 1 ? 'Available' : 'Not Available'
 - else
   %p Oops.. No products are available...
