@@ -1,0 +1,6 @@
+adapter: mysql2
+database: store_dev
+username: sinatra
+password: '12345678'
+host: localhost
+port: 9999

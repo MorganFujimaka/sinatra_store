@@ -1,0 +1,19 @@
+%p
+  Welcome to this store where you can buy fresh fruits from home!
+%br
+
+- if @products.any?
+  .table-responsive
+    %table.table
+      - @products.each do |product|
+        %tr
+          %td
+            %a{href: "/products/#{product.id}"}
+              = product.name
+          %td= product.description
+          %td= product.price
+          %td= product.status == 1 ? 'Available' : 'Not Available'
+- else
+  %p Oops.. No products are available...
+
+%a{href: "/products/new", class: 'btn btn-default'} Add new product

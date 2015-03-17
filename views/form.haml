@@ -1,0 +1,16 @@
+.form-group
+  %label{for: 'name'} Name:
+  %input.form-control{type: 'text', name: 'product[name]', value: "#{@product.name}"}
+.form-group
+  %label{for: 'description'} Description:
+  %textarea.form-control{name: 'product[description]', rows: '4'}
+    = @product.description
+.form-group
+  %label{for: 'price'} Price:
+  %input.form-control{type: 'number', name: 'product[price]', value: "#{@product.price}"}
+.form-group
+  %label{for: 'status'} Status:
+  %select.form-control{name: 'product[status]'}
+    %option{value: '1', selected: @product.status == 1} Available
+    %option{value: '2', selected: @product.status == 2} Not Available
+%button{type: 'submit', class: 'btn btn-default'} Save Product

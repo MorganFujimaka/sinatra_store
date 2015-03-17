@@ -1,0 +1,30 @@
+!!!
+%html{lang: "en"}
+  %head
+    %title= @title || 'Fruits Store'
+    %meta{charset: "utf-8"}
+    %link{rel: 'stylesheet', href: '/bootstrap/css/bootstrap.css'}
+    %link{rel: 'stylesheet', href: '/bootstrap/css/bootstrap-theme.css'}
+    %link{rel: 'stylesheet', href: '/stylesheets/styles.css'}
+  %body
+    %header
+      %h1.title Fresh fruits
+    .container-fluid
+      .row
+        .col-md-3
+          %nav
+            %ul
+              %li
+                %a{href: "/", :title => "Home"} Home
+              %li
+                %a{href: "/products", :title => "Products"} Products
+              %li
+                %a{href: "/about", :title => "About"} About
+              %li
+                %a{href: "/contact", :title => "Contact"} Contact
+        .col-md-8
+          %section
+            = yield
+    %footer
+      %p © 2015 Fresh fruits - All Rights Reserved
+    %script{src: '/bootstrap/js/bootstrap.min.js'}
