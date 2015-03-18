@@ -9,8 +9,9 @@
     .form-group
       %label{for: 'expiration_date'} Expiration Date:
       %select{name: 'payment[month]'}
-        - 1.upto(12) do |a|
+        - 4.upto(12) do |a|
           %option{value: a}= a
       %select{name: 'payment[year]'}
         - 2015.upto(2020) do |a|
           %option{value: a}= a
+    %button{type: 'submit', class: 'btn btn-success'} Pay

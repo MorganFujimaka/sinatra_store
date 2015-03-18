@@ -1,12 +1,10 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require 'haml'
-require 'sass'
 require 'sinatra/activerecord'
 require 'yaml'
 require './models/models'
-require 'pry'
-require 'activemerchant'
+require './app/api/api'
+require 'sinatra/flash'
 
 DB_CONFIG ||= YAML::load(File.open('config/database.yml'))
 
@@ -19,15 +17,21 @@ configure do
                              :path => '/',
                              :expire_after => 2592000,
                              :secret => 'your_secret'
-  set authorize_credentials: {
-    login: "LOGIN",
-    password: "PASSWORD"
-  }
-  ActiveMerchant::Billing::Base.mode = :test
 end
 
 get '/payment' do
-  haml :payment, :locals => { :params => { :credit_card => {}, :order => {} } }
+  haml :payment
+end
+
+post '/payment' do
+  if (1..10).to_a.sample != 1
+    flash[:alert] = 'Success! Your pament was received.'
+    session.delete(:order_id)
+    redirect to('/')
+  else
+    flash[:alert] = 'Your credit card is not valid'
+    redirect to('/cart')
+  end
 end
 
 ['/', '/products'].each do |path|
@@ -59,10 +63,15 @@ post '/customer' do
 end
 
 post '/new_customer' do
-  customer = Customer.create(params[:customer])
-  session[:customer_name] = customer[:firstname]
-  session[:customer_id] = customer[:id]
-  redirect to('/')
+  customer = Customer.new(params[:customer])
+  if customer.save
+    session[:customer_name] = customer[:firstname]
+    session[:customer_id] = customer[:id]
+    redirect to('/')
+  else
+    flash[:alert] = 'Invalid params'
+    redirect to('/sign_up')
+  end
 end
 
 get '/order' do

@@ -43,6 +43,8 @@
                 %a{href: "/contact", :title => "Contact"} Contact
         .col-md-8
           %section
+            - unless flash.empty?
+              .alert-info= styled_flash
             = yield
     %footer
       %p © 2015 Fresh fruits - All Rights Reserved
